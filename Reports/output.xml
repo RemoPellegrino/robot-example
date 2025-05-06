@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.13.1 on win32)" generated="2025-03-25T09:54:48.094953" rpa="false" schemaversion="5">
+<suite id="s1" name="Datadriven" source="C:\Users\user\Documents\Cronos\python\RobotFramework\datadriven.robot">
+<test id="s1-t1" name="Right user empty pass" line="6">
+<kw name="Login With User And Password">
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-03-25T09:54:48.137754" level="INFO">demo</msg>
+<msg time="2025-03-25T09:54:48.137802" level="INFO"/>
+<arg>${username}</arg>
+<arg>${password}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-03-25T09:54:48.137661" elapsed="0.000173"/>
+</kw>
+<arg>username=demo</arg>
+<arg>password=${EMPTY}</arg>
+<status status="PASS" start="2025-03-25T09:54:48.137164" elapsed="0.000732"/>
+</kw>
+<doc>This is a test case documentation of the first one.</doc>
+<tag>1</tag>
+<status status="PASS" start="2025-03-25T09:54:48.136247" elapsed="0.001873"/>
+</test>
+<test id="s1-t2" name="Right user wrong pass" line="6">
+<kw name="Login With User And Password">
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-03-25T09:54:48.139623" level="INFO">demo</msg>
+<msg time="2025-03-25T09:54:48.139659" level="INFO">FooBar</msg>
+<arg>${username}</arg>
+<arg>${password}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-03-25T09:54:48.139554" elapsed="0.000129"/>
+</kw>
+<arg>username=demo</arg>
+<arg>password=FooBar</arg>
+<status status="PASS" start="2025-03-25T09:54:48.139382" elapsed="0.000342"/>
+</kw>
+<doc>This test case has the Tags 2,3 and foo</doc>
+<tag>2</tag>
+<tag>3</tag>
+<tag>foo</tag>
+<status status="PASS" start="2025-03-25T09:54:48.138657" elapsed="0.001290"/>
+</test>
+<test id="s1-t3" name="Login with user  and password mode" line="6">
+<kw name="Login With User And Password">
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-03-25T09:54:48.141405" level="INFO"/>
+<msg time="2025-03-25T09:54:48.141437" level="INFO">mode</msg>
+<arg>${username}</arg>
+<arg>${password}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-03-25T09:54:48.141343" elapsed="0.000118"/>
+</kw>
+<arg>username=${EMPTY}</arg>
+<arg>password=mode</arg>
+<status status="PASS" start="2025-03-25T09:54:48.141059" elapsed="0.000438"/>
+</kw>
+<doc>This test case has a generated name based on template name.</doc>
+<tag>1</tag>
+<tag>2</tag>
+<tag>3</tag>
+<tag>4</tag>
+<status status="PASS" start="2025-03-25T09:54:48.140500" elapsed="0.001187"/>
+</test>
+<test id="s1-t4" name="Login with user  and password " line="6">
+<kw name="Login With User And Password">
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-03-25T09:54:48.143651" level="INFO"/>
+<msg time="2025-03-25T09:54:48.143686" level="INFO"/>
+<arg>${username}</arg>
+<arg>${password}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-03-25T09:54:48.143572" elapsed="0.000136"/>
+</kw>
+<arg>username=${EMPTY}</arg>
+<arg>password=${EMPTY}</arg>
+<status status="PASS" start="2025-03-25T09:54:48.143082" elapsed="0.000667"/>
+</kw>
+<status status="PASS" start="2025-03-25T09:54:48.142416" elapsed="0.001551"/>
+</test>
+<test id="s1-t5" name="Login with user  and password FooBar" line="6">
+<kw name="Login With User And Password">
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-03-25T09:54:48.145772" level="INFO"/>
+<msg time="2025-03-25T09:54:48.145806" level="INFO">FooBar</msg>
+<arg>${username}</arg>
+<arg>${password}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-03-25T09:54:48.145706" elapsed="0.000125"/>
+</kw>
+<arg>username=${EMPTY}</arg>
+<arg>password=FooBar</arg>
+<status status="PASS" start="2025-03-25T09:54:48.145317" elapsed="0.000552"/>
+</kw>
+<status status="PASS" start="2025-03-25T09:54:48.144500" elapsed="0.001533"/>
+</test>
+<test id="s1-t6" name="Login with user FooBar and password mode" line="6">
+<kw name="Login With User And Password">
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-03-25T09:54:48.147534" level="INFO">FooBar</msg>
+<msg time="2025-03-25T09:54:48.147572" level="INFO">mode</msg>
+<arg>${username}</arg>
+<arg>${password}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-03-25T09:54:48.147453" elapsed="0.000151"/>
+</kw>
+<arg>username=FooBar</arg>
+<arg>password=mode</arg>
+<status status="PASS" start="2025-03-25T09:54:48.147250" elapsed="0.000398"/>
+</kw>
+<tag>1</tag>
+<tag>foo</tag>
+<status status="PASS" start="2025-03-25T09:54:48.146575" elapsed="0.001257"/>
+</test>
+<test id="s1-t7" name="Login with user FooBar and password " line="6">
+<kw name="Login With User And Password">
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-03-25T09:54:48.149402" level="INFO">FooBar</msg>
+<msg time="2025-03-25T09:54:48.149437" level="INFO"/>
+<arg>${username}</arg>
+<arg>${password}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-03-25T09:54:48.149332" elapsed="0.000129"/>
+</kw>
+<arg>username=FooBar</arg>
+<arg>password=${EMPTY}</arg>
+<status status="PASS" start="2025-03-25T09:54:48.149023" elapsed="0.000478"/>
+</kw>
+<tag>foo</tag>
+<status status="PASS" start="2025-03-25T09:54:48.148396" elapsed="0.001284"/>
+</test>
+<test id="s1-t8" name="Login with user FooBar and password FooBar" line="6">
+<kw name="Login With User And Password">
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-03-25T09:54:48.150777" level="INFO">FooBar</msg>
+<msg time="2025-03-25T09:54:48.150812" level="INFO">FooBar</msg>
+<arg>${username}</arg>
+<arg>${password}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-03-25T09:54:48.150710" elapsed="0.000124"/>
+</kw>
+<arg>username=FooBar</arg>
+<arg>password=FooBar</arg>
+<status status="PASS" start="2025-03-25T09:54:48.150552" elapsed="0.000321"/>
+</kw>
+<tag>2</tag>
+<tag>foo</tag>
+<status status="PASS" start="2025-03-25T09:54:48.149966" elapsed="0.001023"/>
+</test>
+<status status="PASS" start="2025-03-25T09:54:48.096217" elapsed="0.055154"/>
+</suite>
+<statistics>
+<total>
+<stat pass="8" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="3" fail="0" skip="0">1</stat>
+<stat pass="3" fail="0" skip="0">2</stat>
+<stat pass="2" fail="0" skip="0">3</stat>
+<stat pass="1" fail="0" skip="0">4</stat>
+<stat pass="4" fail="0" skip="0">foo</stat>
+</tag>
+<suite>
+<stat name="Datadriven" id="s1" pass="8" fail="0" skip="0">Datadriven</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

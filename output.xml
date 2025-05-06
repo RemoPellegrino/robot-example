@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.13.1 on win32)" generated="2025-04-03T15:37:01.214069" rpa="false" schemaversion="5">
+<suite id="s1" name="Apitest82" source="C:\Users\user\Documents\Cronos\python\RobotFramework\apitest82.robot">
+<test id="s1-t1" name="Retrieve NRP for known cmuId should give status 200" line="12">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-04-03T15:37:01.891984" level="INFO">Creating Session using : alias=CMUs, url=https://availabilitymonitoringdemo.elia.be/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>CMUs</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-04-03T15:37:01.891777" elapsed="0.000412"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-04-03T15:37:01.892806" level="INFO">${resource} = /core/b2binterface/v1/cmus/82a71e03-878d-4b18-bc25-4b87fd6ccc38/nrp</msg>
+<var>${resource}</var>
+<arg>/core/b2binterface/v1/cmus/${cmuId}/nrp</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-04-03T15:37:01.892538" elapsed="0.000311"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-04-03T15:37:02.468784" level="INFO">GET Request : url=https://availabilitymonitoringdemo.elia.be/core/b2binterface/v1/cmus/82a71e03-878d-4b18-bc25-4b87fd6ccc38/nrp (redirected) 
+ path_url=/core/b2binterface/v1/cmus/82a71e03-878d-4b18-bc25-4b87fd6ccc38/nrp 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-04-03T15:37:02.469072" level="INFO">GET Response : url=https://availabilitymonitoringdemo.elia.be/my.policy 
+ status=200, reason=OK 
+ headers={'Server': 'BigIP', 'Content-Type': 'text/html; charset=utf-8', 'Accept-Ranges': 'bytes', 'Connection': 'close     ', 'Date': 'Thu, 03 Apr 2025 13:37:02 GMT', 'Age': '770', 'Content-Length': '28294', 'X-Frame-Options': 'DENY', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache, must-revalidate', 'Set-Cookie': 'LastMRH_Session=3518bc0a;path=/;secure, MRHSession=b07d43be74540d36dc385b243518bc0a;path=/;secure'} 
+ body=&lt;!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv="X-UA-Compatible" content="IE=Edge"&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"&gt;
+&lt;meta http-equiv="pragma" content="no-cache"&gt;
+&lt;meta http-equiv="cache-control" content="no-cache"&gt;
+&lt;title&gt;availabilitymonitoringdemo.elia.be&lt;/title&gt;
+&lt;link rel="stylesheet" type="text/css" HREF="/public/include/css/apm.css"&gt;
+&lt;script language="JavaScript" src="/public/include/js/session_check.js?v=13" &gt;&lt;/script&gt;
+&lt;script language="JavaScript" src="/public/include/js/agent_common.js" &gt;&lt;/script&gt;
+&lt;script language="JavaScript" src="/public/include/js/web_host.js" &gt;&lt;/script&gt;
+&lt;script language="javascript"&gt;
+&lt;!--
+if(!String.prototype.trim){ String.prototype.trim = function() { return this.replace(/^\s+|\s+$/g, ""); }; }
+
+/////////////////////////////////////////////////////////////////////////
+// function to return the customized screen when session expiration
+// is detected on the client-side
+/////////////////////////////////////////////////////////////////////////
+function SessionExpired_CustomizedScreenGet()
+{
+  return '&lt;br&gt;&lt;h3&gt;Session Expired/Timeout&lt;/h3&gt;&lt;br&gt;Due to user inactivity, your session expired. Click the following link to start a new session.&lt;br&gt;&lt;br&gt;&lt;table id="IHoptions"&gt;&lt;tr&gt;&lt;td&gt;&lt;a href="[SESSION_RESTART_URL]" class="option"&gt;&lt;img src="/public/images/sq-positive.gif" &gt;&lt;/a&gt;&lt;a href="[SESSION_RESTART_URL]"&gt;Start a new session&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;';
+}
+
+var globalRestartOnSubmit = false;
+
+function sessionTimedOut()
+{
+    // restart session automatically upon "submit" for edge-like clients if logon form is compatibile
+    if (externalWebHost.hasWebLogonResetSession() &amp;&amp; logonFormCompatible) {
+       globalRestartOnSubmit = true;
+    }
+    else {
+       // display session expired msg for non-edge clients
+       if (externalWebHost.hasWebLogonResetSession()) {
+		externalWebHost.webLogonResetSession();
+       }
+       sessionTimeout.showSplashLayer("MessageDIV", SessionExpired_CustomizedScreenGet());
+    }
+}
+
+/**
+ * Place the focus and init the form fields
+ */
+
+if(self != top) { top.location = self.location; }
+window.onerror=function(){ return function(){ return; } }
+
+//--------------------------------------------------------------------
+var doAutoSubmit = true;
+
+var globalFormId = 'auth_form';
+var globalTableId = 'credentials_table';
+var globalSubmitTrId = 'submit_row';
+
+var globalSavePasswordCheckbox = null;
+var logonFormCompatible = false;
+
+var softTokenInput = null;
+var softTokenFieldId = "";
+var softTokenState = "";
+var softTokenNewPIN = "";
+var softTokenPINAutoPopulate = false;
+if( !softTokenState ) {
+    softTokenState = "SECURID_AUTH_STATE_START";}
+
+    var challengeMode = false;
+
+function getInputField(fieldId)
+{
+    var form = document.getElementById( globalFormId );
+    if( form == null ){
+        return null;
+    }
+
+    if(fieldId == null || fieldId == ""){
+        return null;
+    }
+
+    var inputs = form.getElementsByTagName("input");
+    for( var i=0; i&lt;inputs.length; i++ ){
+        if(  inputs[i].name == fieldId){
+            return inputs[i];
+        }
+    }
+    return null;
+}
+
+function getSoftTokenInput()
+{
+    return getInputField(softTokenFieldId);
+}
+
+function getUsernameInput()
+{
+    return getInputField("username");
+}
+
+function getPasswordInput()
+{
+    return getInputField("password");
+}
+
+function edgeClientSoftTokenSupport()
+{
+    try {
+        return externalWebHost.hasWebLogonSoftTokenSupport();
+    } catch(e) {}
+    return false;
+}
+
+function getSoftTokenPrompt()
+{
+    if ( softTokenFieldId != "" &amp;&amp; edgeClientSoftTokenSupport()) {
+        var div = document.getElementById("formHeaderSoftToken");
+        if (div)  {
+            return div.innerHTML;
+        }
+    }
+    return  null;
+}
+
+function setSoftTokenChallengeResponse(challengeResponse)
+{
+    var challengeElements = document.getElementsByName('_F5_challenge');
+    if((challengeElements.length == 0) || (null == challengeElements[0])) {
+        return;
+    }
+
+    var challengeElement = challengeElements[0];
+    if(challengeElement.tagName.toLowerCase() == 'select') {
+        var challengeOptions = challengeElement.options;
+        if(null == challengeOptions){
+            return;
+        }
+        for (var i = 0, optionsLength = challengeOptions.length; i &lt; optionsLength; i++) {
+            if (challengeOptions[i].value == challengeResponse) {
+                challengeElement.selectedIndex = i;
+                break;
+            }
+        }
+    }else if(challengeElement.tagName.toLowerCase() == 'input') {
+        challengeElement.value = challengeResponse;
+    }
+}
+
+function OnSubmitEdgeRSASoftToken()
+{
+    var support = edgeClientSoftTokenSupport();
+    if( true != support ) {
+        return;
+    }
+    var form = document.getElementById( globalFormId );
+    if( form == null ){
+        return;
+    }
+    var inputs = form.getElementsByTagName("input");
+
+    var hiddenInput = document.createElement("input");
+    hiddenInput.setAttribute("type", "hidden");
+        hiddenInput.setAttribute("name", "softTokenError");
+    //append to form element that you want .
+    form.appendChild(hiddenInput);
+
+    try{
+        if(softTokenInput != null) { //normal mode
+            // if the client cannot request soft-token PIN,
+            // ask user to enter it in the logon page and pass the value to the client
+            // Otherwise, the client already has the PIN
+            if(!softTokenPINAutoPopulate) {
+                externalWebHost.setWebLogonSoftTokenPIN(softTokenInput.value);
+            }
+            var passcode = externalWebHost.getWebLogonSoftTokenPasscode();
+            if( passcode ) {
+                softTokenInput.value = passcode;
+            }
+        } else if( challengeMode ) { //challenge mode
+            // If the client can provide response to the challenge, use it instead of user input
+            if(externalWebHost.hasWeblogonSoftTokenChallengeResponse()){
+                var challengeResponse = externalWebHost.getWeblogonSoftTokenChallengeResponse();
+                if(null != challengeResponse){
+                     setSoftTokenChallengeResponse(challengeResponse);
+                }
+            }else{
+                // Request user input by default
+                externalWebHost.setWebLogonSoftTokenPIN(inputs[0].value);
+
+                var passcode = externalWebHost.getWebLogonSoftTokenPasscode();
+                if( passcode ) {
+                    inputs[0].value = passcode;
+                }
+            }
+
+        }
+        hiddenInput.value = externalWebHost.getWebLogonSoftTokenError();
+    } catch(e) { }
+
+    return;
+}
+
+// check whether logon form is compatible with the client for auto-population and auto-submission
+// only "username", "password" and soft token field (the name is stored in softTokenFieldId ) are supported
+// fields can be configured in either order, but can only be text, password or checkbox types
+// form is not considered compatible if it contains any additional fields not supported by the client
+// The form is compatible even if it contains a subset of the supported fields
+// In this case the client will auto-populate only those fields
+function getFormCompatibility()
+{
+    var form = document.getElementById( globalFormId );
+    if( form == null ){
+        return false;
+    }
+    // check if form suites
+    var inputs = [];
+    var inputsTemp = form.getElementsByTagName("input");
+    // filter submit, reset, hidden and little green men
+    for( var i=0; i&lt;inputsTemp.length; i++ ){
+        if( inputsTemp[i].type == "text" || inputsTemp[i].type == "password"){
+            inputs[ inputs.length ] = inputsTemp[i];
+        }
+    }
+
+    var softTokenSupported = edgeClientSoftTokenSupport() &amp;&amp; (null != softTokenInput);
+    // Check if there are any custom fields that are not supported by Edge Client for auto-population and auto-submission
+    for( var i=0; i&lt;inputs.length; i++ ){
+       if((inputs[i].type == "text" &amp;&amp; inputs[i].name == "username") ||
+          (inputs[i].type == "password" &amp;&amp; inputs[i].name == "password") ||
+          (softTokenSupported &amp;&amp; inputs[i].type == "password" &amp;&amp; inputs[i].name == softTokenInput.name)){
+               continue;
+       }else {
+          return false;
+       }
+    }
+    return true;
+}
+
+function setOrigUriLink()
+{
+    var params = parseQueryParams(window.location.search.substr(1));
+    if (!params.hasOwnProperty('ORIG_URI')) {
+        return;
+    }
+
+    if (params['ORIG_URI'].length != 8) {
+        return;
+    }
+
+    var re = /[0-9a-fA-F]{8}/;
+    if (!re.test(params['ORIG_URI'])) {
+        return;
+    }
+
+
+    var credTable = document.getElementById('credentials_table');
+    if (credTable == null) {
+        return;
+    }
+    var tBody = credTable.tBodies[0];
+    if (tBody == null) {
+        return;
+    }
+
+    var trTag = document.createElement("TR");
+    tBody.insertBefore(trTag, tBody.children[tBody.children.length - 1]);
+
+    var tdTag = document.createElement("TD");
+    tdTag.setAttribute("class", "credentials_table_unified_cell");
+    tdTag.setAttribute("colspan", "2");
+    trTag.appendChild(tdTag);
+
+    var tdText = document.createElement("A");
+    tdText.innerHTML = "Click here if already logged in ";
+    tdText.setAttribute("href", "/vdesk/policy_done.php3?ORIG_URI=" + params['ORIG_URI']);
+    tdTag.appendChild(tdText);
+}
+
+function OnLoad()
+{
+    var header = document.getElementById("credentials_table_header");
+    var softTokenHeaderStr = getSoftTokenPrompt();
+    if ( softTokenHeaderStr ) {
+        header.innerHTML = softTokenHeaderStr;
+    }
+    setFormAttributeByQueryParams("auth_form", "action", "/subsession_logon_submit.php3");
+    setFormAttributeByQueryParams("v2_original_url", "href", "/subsession_logon_submit.php3");
+
+    // check if form suites
+    var form = document.getElementById( globalFormId );
+    if( form == null ){
+        return;
+    }
+    // check if form suites
+    var inputs = form.getElementsByTagName("input");
+    // filter submit, reset, hidden and little ... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg time="2025-04-03T15:37:02.469531" level="INFO">C:\Users\user\Documents\Cronos\python\RobotFramework\RobotEnv\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'availabilitymonitoringdemo.elia.be'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(
+C:\Users\user\Documents\Cronos\python\RobotFramework\RobotEnv\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'availabilitymonitoringdemo.elia.be'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-04-03T15:37:02.470229" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>CMUs</arg>
+<arg>${resource}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-04-03T15:37:01.893085" elapsed="0.577222"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2025-04-03T15:37:02.471409" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2025-04-03T15:37:02.470702" elapsed="0.000830"/>
+</kw>
+<status status="PASS" start="2025-04-03T15:37:01.890819" elapsed="0.581096"/>
+</test>
+<test id="s1-t2" name="Retrieve NRP for unknown cmuId should give status ?" line="18">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-04-03T15:37:02.474004" level="INFO">Creating Session using : alias=CMUs, url=https://availabilitymonitoringdemo.elia.be/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>CMUs</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-04-03T15:37:02.473814" elapsed="0.000374"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-04-03T15:37:02.474938" level="INFO">${resource} = /core/b2binterface/v1/cmus/foobar/nrp</msg>
+<var>${resource}</var>
+<arg>/core/b2binterface/v1/cmus/${unknownId}/nrp</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-04-03T15:37:02.474630" elapsed="0.000339"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-04-03T15:37:03.091668" level="INFO">GET Request : url=https://availabilitymonitoringdemo.elia.be/core/b2binterface/v1/cmus/foobar/nrp (redirected) 
+ path_url=/core/b2binterface/v1/cmus/foobar/nrp 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-04-03T15:37:03.091849" level="INFO">GET Response : url=https://availabilitymonitoringdemo.elia.be/my.policy 
+ status=200, reason=OK 
+ headers={'Server': 'BigIP', 'Content-Type': 'text/html; charset=utf-8', 'Accept-Ranges': 'bytes', 'Connection': 'close     ', 'Date': 'Thu, 03 Apr 2025 13:37:02 GMT', 'Age': '770', 'Content-Length': '28294', 'X-Frame-Options': 'DENY', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache, must-revalidate', 'Set-Cookie': 'LastMRH_Session=e80257dc;path=/;secure, MRHSession=82c00294327cb97a99a3347ce80257dc;path=/;secure'} 
+ body=&lt;!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv="X-UA-Compatible" content="IE=Edge"&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"&gt;
+&lt;meta http-equiv="pragma" content="no-cache"&gt;
+&lt;meta http-equiv="cache-control" content="no-cache"&gt;
+&lt;title&gt;availabilitymonitoringdemo.elia.be&lt;/title&gt;
+&lt;link rel="stylesheet" type="text/css" HREF="/public/include/css/apm.css"&gt;
+&lt;script language="JavaScript" src="/public/include/js/session_check.js?v=13" &gt;&lt;/script&gt;
+&lt;script language="JavaScript" src="/public/include/js/agent_common.js" &gt;&lt;/script&gt;
+&lt;script language="JavaScript" src="/public/include/js/web_host.js" &gt;&lt;/script&gt;
+&lt;script language="javascript"&gt;
+&lt;!--
+if(!String.prototype.trim){ String.prototype.trim = function() { return this.replace(/^\s+|\s+$/g, ""); }; }
+
+/////////////////////////////////////////////////////////////////////////
+// function to return the customized screen when session expiration
+// is detected on the client-side
+/////////////////////////////////////////////////////////////////////////
+function SessionExpired_CustomizedScreenGet()
+{
+  return '&lt;br&gt;&lt;h3&gt;Session Expired/Timeout&lt;/h3&gt;&lt;br&gt;Due to user inactivity, your session expired. Click the following link to start a new session.&lt;br&gt;&lt;br&gt;&lt;table id="IHoptions"&gt;&lt;tr&gt;&lt;td&gt;&lt;a href="[SESSION_RESTART_URL]" class="option"&gt;&lt;img src="/public/images/sq-positive.gif" &gt;&lt;/a&gt;&lt;a href="[SESSION_RESTART_URL]"&gt;Start a new session&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;';
+}
+
+var globalRestartOnSubmit = false;
+
+function sessionTimedOut()
+{
+    // restart session automatically upon "submit" for edge-like clients if logon form is compatibile
+    if (externalWebHost.hasWebLogonResetSession() &amp;&amp; logonFormCompatible) {
+       globalRestartOnSubmit = true;
+    }
+    else {
+       // display session expired msg for non-edge clients
+       if (externalWebHost.hasWebLogonResetSession()) {
+		externalWebHost.webLogonResetSession();
+       }
+       sessionTimeout.showSplashLayer("MessageDIV", SessionExpired_CustomizedScreenGet());
+    }
+}
+
+/**
+ * Place the focus and init the form fields
+ */
+
+if(self != top) { top.location = self.location; }
+window.onerror=function(){ return function(){ return; } }
+
+//--------------------------------------------------------------------
+var doAutoSubmit = true;
+
+var globalFormId = 'auth_form';
+var globalTableId = 'credentials_table';
+var globalSubmitTrId = 'submit_row';
+
+var globalSavePasswordCheckbox = null;
+var logonFormCompatible = false;
+
+var softTokenInput = null;
+var softTokenFieldId = "";
+var softTokenState = "";
+var softTokenNewPIN = "";
+var softTokenPINAutoPopulate = false;
+if( !softTokenState ) {
+    softTokenState = "SECURID_AUTH_STATE_START";}
+
+    var challengeMode = false;
+
+function getInputField(fieldId)
+{
+    var form = document.getElementById( globalFormId );
+    if( form == null ){
+        return null;
+    }
+
+    if(fieldId == null || fieldId == ""){
+        return null;
+    }
+
+    var inputs = form.getElementsByTagName("input");
+    for( var i=0; i&lt;inputs.length; i++ ){
+        if(  inputs[i].name == fieldId){
+            return inputs[i];
+        }
+    }
+    return null;
+}
+
+function getSoftTokenInput()
+{
+    return getInputField(softTokenFieldId);
+}
+
+function getUsernameInput()
+{
+    return getInputField("username");
+}
+
+function getPasswordInput()
+{
+    return getInputField("password");
+}
+
+function edgeClientSoftTokenSupport()
+{
+    try {
+        return externalWebHost.hasWebLogonSoftTokenSupport();
+    } catch(e) {}
+    return false;
+}
+
+function getSoftTokenPrompt()
+{
+    if ( softTokenFieldId != "" &amp;&amp; edgeClientSoftTokenSupport()) {
+        var div = document.getElementById("formHeaderSoftToken");
+        if (div)  {
+            return div.innerHTML;
+        }
+    }
+    return  null;
+}
+
+function setSoftTokenChallengeResponse(challengeResponse)
+{
+    var challengeElements = document.getElementsByName('_F5_challenge');
+    if((challengeElements.length == 0) || (null == challengeElements[0])) {
+        return;
+    }
+
+    var challengeElement = challengeElements[0];
+    if(challengeElement.tagName.toLowerCase() == 'select') {
+        var challengeOptions = challengeElement.options;
+        if(null == challengeOptions){
+            return;
+        }
+        for (var i = 0, optionsLength = challengeOptions.length; i &lt; optionsLength; i++) {
+            if (challengeOptions[i].value == challengeResponse) {
+                challengeElement.selectedIndex = i;
+                break;
+            }
+        }
+    }else if(challengeElement.tagName.toLowerCase() == 'input') {
+        challengeElement.value = challengeResponse;
+    }
+}
+
+function OnSubmitEdgeRSASoftToken()
+{
+    var support = edgeClientSoftTokenSupport();
+    if( true != support ) {
+        return;
+    }
+    var form = document.getElementById( globalFormId );
+    if( form == null ){
+        return;
+    }
+    var inputs = form.getElementsByTagName("input");
+
+    var hiddenInput = document.createElement("input");
+    hiddenInput.setAttribute("type", "hidden");
+        hiddenInput.setAttribute("name", "softTokenError");
+    //append to form element that you want .
+    form.appendChild(hiddenInput);
+
+    try{
+        if(softTokenInput != null) { //normal mode
+            // if the client cannot request soft-token PIN,
+            // ask user to enter it in the logon page and pass the value to the client
+            // Otherwise, the client already has the PIN
+            if(!softTokenPINAutoPopulate) {
+                externalWebHost.setWebLogonSoftTokenPIN(softTokenInput.value);
+            }
+            var passcode = externalWebHost.getWebLogonSoftTokenPasscode();
+            if( passcode ) {
+                softTokenInput.value = passcode;
+            }
+        } else if( challengeMode ) { //challenge mode
+            // If the client can provide response to the challenge, use it instead of user input
+            if(externalWebHost.hasWeblogonSoftTokenChallengeResponse()){
+                var challengeResponse = externalWebHost.getWeblogonSoftTokenChallengeResponse();
+                if(null != challengeResponse){
+                     setSoftTokenChallengeResponse(challengeResponse);
+                }
+            }else{
+                // Request user input by default
+                externalWebHost.setWebLogonSoftTokenPIN(inputs[0].value);
+
+                var passcode = externalWebHost.getWebLogonSoftTokenPasscode();
+                if( passcode ) {
+                    inputs[0].value = passcode;
+                }
+            }
+
+        }
+        hiddenInput.value = externalWebHost.getWebLogonSoftTokenError();
+    } catch(e) { }
+
+    return;
+}
+
+// check whether logon form is compatible with the client for auto-population and auto-submission
+// only "username", "password" and soft token field (the name is stored in softTokenFieldId ) are supported
+// fields can be configured in either order, but can only be text, password or checkbox types
+// form is not considered compatible if it contains any additional fields not supported by the client
+// The form is compatible even if it contains a subset of the supported fields
+// In this case the client will auto-populate only those fields
+function getFormCompatibility()
+{
+    var form = document.getElementById( globalFormId );
+    if( form == null ){
+        return false;
+    }
+    // check if form suites
+    var inputs = [];
+    var inputsTemp = form.getElementsByTagName("input");
+    // filter submit, reset, hidden and little green men
+    for( var i=0; i&lt;inputsTemp.length; i++ ){
+        if( inputsTemp[i].type == "text" || inputsTemp[i].type == "password"){
+            inputs[ inputs.length ] = inputsTemp[i];
+        }
+    }
+
+    var softTokenSupported = edgeClientSoftTokenSupport() &amp;&amp; (null != softTokenInput);
+    // Check if there are any custom fields that are not supported by Edge Client for auto-population and auto-submission
+    for( var i=0; i&lt;inputs.length; i++ ){
+       if((inputs[i].type == "text" &amp;&amp; inputs[i].name == "username") ||
+          (inputs[i].type == "password" &amp;&amp; inputs[i].name == "password") ||
+          (softTokenSupported &amp;&amp; inputs[i].type == "password" &amp;&amp; inputs[i].name == softTokenInput.name)){
+               continue;
+       }else {
+          return false;
+       }
+    }
+    return true;
+}
+
+function setOrigUriLink()
+{
+    var params = parseQueryParams(window.location.search.substr(1));
+    if (!params.hasOwnProperty('ORIG_URI')) {
+        return;
+    }
+
+    if (params['ORIG_URI'].length != 8) {
+        return;
+    }
+
+    var re = /[0-9a-fA-F]{8}/;
+    if (!re.test(params['ORIG_URI'])) {
+        return;
+    }
+
+
+    var credTable = document.getElementById('credentials_table');
+    if (credTable == null) {
+        return;
+    }
+    var tBody = credTable.tBodies[0];
+    if (tBody == null) {
+        return;
+    }
+
+    var trTag = document.createElement("TR");
+    tBody.insertBefore(trTag, tBody.children[tBody.children.length - 1]);
+
+    var tdTag = document.createElement("TD");
+    tdTag.setAttribute("class", "credentials_table_unified_cell");
+    tdTag.setAttribute("colspan", "2");
+    trTag.appendChild(tdTag);
+
+    var tdText = document.createElement("A");
+    tdText.innerHTML = "Click here if already logged in ";
+    tdText.setAttribute("href", "/vdesk/policy_done.php3?ORIG_URI=" + params['ORIG_URI']);
+    tdTag.appendChild(tdText);
+}
+
+function OnLoad()
+{
+    var header = document.getElementById("credentials_table_header");
+    var softTokenHeaderStr = getSoftTokenPrompt();
+    if ( softTokenHeaderStr ) {
+        header.innerHTML = softTokenHeaderStr;
+    }
+    setFormAttributeByQueryParams("auth_form", "action", "/subsession_logon_submit.php3");
+    setFormAttributeByQueryParams("v2_original_url", "href", "/subsession_logon_submit.php3");
+
+    // check if form suites
+    var form = document.getElementById( globalFormId );
+    if( form == null ){
+        return;
+    }
+    // check if form suites
+    var inputs = form.getElementsByTagName("input");
+    // filter submit, reset, hidden and little ... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg time="2025-04-03T15:37:03.092245" level="INFO">C:\Users\user\Documents\Cronos\python\RobotFramework\RobotEnv\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'availabilitymonitoringdemo.elia.be'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(
+C:\Users\user\Documents\Cronos\python\RobotFramework\RobotEnv\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'availabilitymonitoringdemo.elia.be'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-04-03T15:37:03.093012" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>CMUs</arg>
+<arg>${resource}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-04-03T15:37:02.475249" elapsed="0.617828"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2025-04-03T15:37:03.094340" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2025-04-03T15:37:03.093511" elapsed="0.000941"/>
+</kw>
+<status status="PASS" start="2025-04-03T15:37:02.472753" elapsed="0.622137"/>
+</test>
+<status status="PASS" start="2025-04-03T15:37:01.216012" elapsed="1.887568"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Apitest82" id="s1" pass="2" fail="0" skip="0">Apitest82</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
